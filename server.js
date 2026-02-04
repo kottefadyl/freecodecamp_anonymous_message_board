@@ -3,12 +3,27 @@ require('dotenv').config();
 const express     = require('express');
 const bodyParser  = require('body-parser');
 const cors        = require('cors');
-
+const helmet      = require('helmet');
 const apiRoutes         = require('./routes/api.js');
 const fccTestingRoutes  = require('./routes/fcctesting.js');
 const runner            = require('./test-runner');
+require("./db-connection"); // Assurez-vous que ce fichier gère sa propre erreur de connexion
 
 const app = express();
+
+// Configuration Helmet exigée par freeCodeCamp
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "https://code.jquery.com"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+    },
+  },
+  hidePoweredBy: { setTo: 'PHP 4.2.0' }
+}));
+
+app.set('trust proxy', true);
 
 app.use('/public', express.static(process.cwd() + '/public'));
 

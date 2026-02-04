@@ -1,2 +1,3 @@
 /node_modules/
+DB=mongodb+srv://admin:Kottekevin01@cluster0.vrbgryc.mongodb.net/?appName=Cluster0 
 .env
