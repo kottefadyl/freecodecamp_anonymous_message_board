@@ -13,6 +13,7 @@ const app = express();
 
 // Configuration Helmet exigée par freeCodeCamp
 app.use(helmet({
+  referrerPolicy: { policy: 'same-origin' }, // AJOUTEZ CETTE LIGNE
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
@@ -22,6 +23,7 @@ app.use(helmet({
   },
   hidePoweredBy: { setTo: 'PHP 4.2.0' }
 }));
+
 
 app.set('trust proxy', true);
 
